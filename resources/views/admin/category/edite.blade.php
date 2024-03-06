@@ -30,7 +30,7 @@
                   <div class="col-md-6 mb-3">
                       <label>Image</label>
                       <input type="file" name="image" class="form-control">
-                      <image src="{{asset('uploads/category/'.$category->image)}}" width="100px" height="100px">
+                      <image src="{{asset($category->image)}}" width="100px" height="100px">
                       </div>
                       <div class="col-md-6 mb-3 ">
                           <div class="form-check">

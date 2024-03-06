@@ -17,6 +17,7 @@
                 <tr>
                     <td>ID</td>
                     <td>CATEGORY</td>
+                    <td>Brand</td>
                     <td>PRODUCT</td>
                     <td>QUANTITY</td>
                     <td>PRICE</td>
@@ -32,6 +33,9 @@
                         @if($product->category)
                         <td>{{ $product->category->name }}</td>
                         @endif
+                        
+                        <td>{{ $product->brand }}</td>
+                       
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->quantity }}</td>
                         <td>{{ $product->selling_price }}</td>

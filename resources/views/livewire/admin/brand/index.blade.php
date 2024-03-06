@@ -9,6 +9,19 @@
                 <form wire:submit.prevent="createbrand()">
                     <div class="modal-body">
                         <div class="mb-3">
+                            <label>Category</label>
+                            <select wire:model.defer="category_id" class="form-control">
+                                <option>select category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('name')
+                                <small>{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label>Name</label>
                             <input type="text" class="form-control" wire:model.defer="name" />
                             @error('name')
@@ -48,6 +61,16 @@
                 </div>
                 <form wire:submit.prevent="updatebrand()">
                     <div class="modal-body">
+                        <div class="mb-3">
+                            <label>Category</label>
+                            <select wire:model.defer="category_id" class="form-control">
+                                <option disabled>--Select Category--</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
                         <div class="mb-3">
                             <label>Name</label>
                             <input type="text" class="form-control" wire:model.defer="name" />
@@ -117,6 +140,7 @@
                         <thead>
                             <tr>
                                 <td>ID</td>
+                                <td>Category</td>
                                 <td>NAME</td>
                                 <td>STATUS</td>
                                 <td>ACTIONS</td>
@@ -127,6 +151,11 @@
                             @foreach ($brands as $brand)
                                 <tr>
                                     <td>{{ $brand->id }}</td>
+                                    @if ($brand->category)
+                                        <td>{{ $brand->category->name }}</td>
+                                    @else
+                                        <td>N/A</td>
+                                    @endif
                                     <td>{{ $brand->name }}</td>
                                     <td>{{ $brand->status == '1' ? 'hidden' : 'visible' }}</td>
                                     <td>
