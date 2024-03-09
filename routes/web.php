@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\FrontEnd\FrontEndController;
+use App\Http\Controllers\FrontEnd\WishListController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,18 +24,24 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get("/", [FrontEndController::class,'index']);
-Route::get("/collections", [FrontEndController::class,'categories']);
-Route::get("/collections/{category_slug}", [FrontEndController::class,'products']);
-Route::get("/collections/{category_slug}/{product_slug}", [FrontEndController::class,'productView']);
-
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+Route::get("/", [FrontEndController::class, 'index']);
+Route::get("/collections", [FrontEndController::class, 'categories']);
+Route::get("/collections/{category_slug}", [FrontEndController::class, 'products']);
+Route::get("/collections/{category_slug}/{product_slug}", [FrontEndController::class, 'productView']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('wishlists', [WishListController::class, 'index']);
+});
+
+
+
+
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']); 
-     // route group for category
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    // route group for category
     Route::controller(CategoryController::class)->group(function () {
         Route::get('admin/category', 'index');
         Route::get('admin/category/create', 'create');
@@ -46,6 +54,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::controller(BrandController::class)->group(function () {
         Route::get('admin/brand', 'index');
     });
+    // route group for Product
     Route::controller(ProductController::class)->group(function () {
         Route::get('admin/product/create', 'create');
         Route::get('admin/product', 'index');
@@ -56,6 +65,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::post('/admin/productcolor/{productcolor_id}', 'updateproductcolor');
         Route::get('/admin/productcolor/{productcolor_id}', 'deleteproductcolor');
     });
+    // route group for color
     Route::controller(ColorController::class)->group(function () {
         Route::get('admin/color/', 'index');
         Route::get('admin/color/create', 'create');
@@ -63,8 +73,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('admin/color/{color}/edite', 'edite');
         Route::put('admin/color/{color}', 'update');
         Route::get('admin/color/{color}/delete', 'delete');
-       
+
     });
+    // route group for sliders
     Route::controller(SliderController::class)->group(function () {
         Route::get('admin/slider', 'index');
         Route::get('admin/slider/create', 'create');
@@ -72,6 +83,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('admin/slider/{slider}/edite', 'edite');
         Route::post('admin/slider/{slider}', 'update');
         Route::get('admin/slider/{slider}/delete', 'delete');
-       
+
     });
 });

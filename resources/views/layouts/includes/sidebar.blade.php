@@ -1,11 +1,11 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="index.html">
                 <i class="mdi mdi-home menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a class="nav-link" href="/">
                 <i class="mdi mdi-home menu-icon"></i>
@@ -59,7 +59,7 @@
                 <span class="menu-title">Sliders</span>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="mdi mdi-account menu-icon"></i>
                 <span class="menu-title">User Pages</span>
@@ -75,12 +75,12 @@
                     </li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+        {{-- <li class="nav-item">
             <a class="nav-link" href="documentation/documentation.html">
                 <i class="mdi mdi-file-document-box-outline menu-icon"></i>
                 <span class="menu-title">Documentation</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </nav>

@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                    <h5 class="brand-name">Funda Ecom</h5>
+                    <h5 class="brand-name">E-COMMERCE</h5>
                 </div>
                 <div class="col-md-5 my-auto">
                     <form role="search">
@@ -24,9 +24,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-heart"></i> Wishlist (0)
+                            @if(Auth::check())
+                            <a class="nav-link" href="/wishlists">
+                                <i class="fa fa-heart"></i> Wishlist ({{Auth::user()->wishlists->count()}})
                             </a>
+                            @endif
                         </li>
                         <li class="nav-item dropdown">
                             @guest
