@@ -5,6 +5,7 @@ namespace App\Http\Livewire\FrontEnd\Products;
 use App\Models\Wishlist;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
 
 class View extends Component
 {
@@ -51,6 +52,37 @@ class View extends Component
     {
         if ($this->quantityval > 0) {
             $this->quantityval--;
+        }
+    }
+    public function addtocart($product_id)
+    {
+        if (Auth::check()) {
+            if ($this->product->where('id', $product_id)->where('status', 0)->exists()) {
+                if (Cart::where("user_id", auth()->user()->id)->where("product_id", $product_id)->first()) {
+                    $this->dispatchBrowserEvent('message', ['text' => 'Product already added to cart!']);
+                } else {
+                    if ($this->product->quantity > 0) {
+                        if ($this->product->quantity > $this->quantityval) {
+                            Cart::create([
+                                'user_id' => Auth::user()->id,
+                                'product_id' => $product_id,
+                                'quantity' => $this->quantityval
+                            ]);
+                            $this->emit('cartchanged');
+                            $this->dispatchBrowserEvent('message', ['text' => 'Product added to cart!']);
+                        } else {
+                            $this->dispatchBrowserEvent('message', ['text' => 'only  ' . $this->product->quantity . ' of it  is available!']);
+                        }
+                    } else {
+                        $this->dispatchBrowserEvent('message', ['text' => 'out of stock']);
+                    }
+
+                }
+            } else {
+                $this->dispatchBrowserEvent('message', ['text' => 'Product is not available!']);
+            }
+        } else {
+            $this->dispatchBrowserEvent('message', ['text' => 'Please Login First!']);
         }
     }
 

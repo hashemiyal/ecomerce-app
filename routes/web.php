@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontEndController;
 use App\Http\Controllers\FrontEnd\WishListController;
 
@@ -34,6 +35,7 @@ Route::get("/collections/{category_slug}", [FrontEndController::class, 'products
 Route::get("/collections/{category_slug}/{product_slug}", [FrontEndController::class, 'productView']);
 Route::middleware(['auth'])->group(function () {
     Route::get('wishlists', [WishListController::class, 'index']);
+    Route::get('carts', [CartController::class, 'index']);
 });
 
 

@@ -17,17 +17,18 @@
                 </div>
                 <div class="col-md-5 my-auto">
                     <ul class="nav justify-content-end">
-
+                        @if (Auth::check())
+                            <li class="nav-item">
+                                <a class="nav-link" href="/carts">
+                                    <i class="fa fa-shopping-cart"></i> Cart (<livewire:front-end.cart.cartcount />)
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fa fa-shopping-cart"></i> Cart (0)
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            @if(Auth::check())
-                            <a class="nav-link" href="/wishlists">
-                                <i class="fa fa-heart"></i> Wishlist ({{Auth::user()->wishlists->count()}})
-                            </a>
+                            @if (Auth::check())
+                                <a class="nav-link" href="/wishlists">
+                                    <i class="fa fa-heart"></i> Wishlist ({{ Auth::user()->wishlists->count() }})
+                                </a>
                             @endif
                         </li>
                         <li class="nav-item dropdown">

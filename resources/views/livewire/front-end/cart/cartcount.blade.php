@@ -1,0 +1,5 @@
+<span>
+    {{$cartcount}}
+</span>
+ 
+
