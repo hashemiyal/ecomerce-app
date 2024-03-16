@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontEndController;
 use App\Http\Controllers\FrontEnd\WishListController;
+use App\Http\Controllers\FrontEnd\CheckoutController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,7 @@ Route::get("/collections/{category_slug}/{product_slug}", [FrontEndController::c
 Route::middleware(['auth'])->group(function () {
     Route::get('wishlists', [WishListController::class, 'index']);
     Route::get('carts', [CartController::class, 'index']);
+    Route::get('checkout', [CheckoutController::class, 'index']);
 });
 
 
