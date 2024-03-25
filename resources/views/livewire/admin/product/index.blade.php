@@ -33,7 +33,6 @@
                         @if($product->category)
                         <td>{{ $product->category->name }}</td>
                         @endif
-                        
                         <td>{{ $product->brand }}</td>
                        
                         <td>{{ $product->name }}</td>

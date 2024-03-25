@@ -32,7 +32,7 @@
                                         <label class="product-name">
                                             @if ($cart->product->productImages)
                                              @foreach($cart->product->productImages as $image)
-                                                <img src="{{ $image->image }}"
+                                                <img src="{{asset($image->image)}}"
                                                     style="width: 50px; height: 50px" alt="">
                                                     @break
                                                     @endforeach

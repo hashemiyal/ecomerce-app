@@ -9,6 +9,8 @@ use App\Http\Controllers\FrontEnd\CartController;
 use App\Http\Controllers\FrontEnd\FrontEndController;
 use App\Http\Controllers\FrontEnd\WishListController;
 use App\Http\Controllers\FrontEnd\CheckoutController;
+use App\Http\Controllers\FrontEnd\OrderController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('wishlists', [WishListController::class, 'index']);
     Route::get('carts', [CartController::class, 'index']);
     Route::get('checkout', [CheckoutController::class, 'index']);
+    Route::get('orders', [OrderController::class, 'index']);
+    Route::get('orders/{order}', [OrderController::class, 'show']);
 });
 
 
@@ -87,6 +91,12 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('admin/slider/{slider}/edite', 'edite');
         Route::post('admin/slider/{slider}', 'update');
         Route::get('admin/slider/{slider}/delete', 'delete');
+
+    });
+    Route::controller(App\Http\Controllers\Admin\OrderController::class)->group(function () {
+        Route::get('admin/orders', 'index');
+        Route::get('admin/orders/{order}', 'show');
+    
 
     });
 });
